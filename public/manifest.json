@@ -1,0 +1,28 @@
+{
+  "name": "GPTStyler",
+  "short_name": "GPTStyler",
+  "description": "AI가 만들어주는 나만의 채팅 테마 디자이너",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#19c37d",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["utilities", "lifestyle"],
+  "lang": "ko"
+}
