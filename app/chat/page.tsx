@@ -180,9 +180,22 @@ main{
   background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
   border-radius:8px;color:#ececec;font-size:12px;padding:6px 12px;cursor:pointer;
 }
+/* ── mobile drawer ── */
+.drawer-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;
+}
+.drawer-overlay.open{display:block}
+nav.drawer{
+  position:fixed!important;top:0;left:0;height:100vh;z-index:101;
+  transform:translateX(-100%);transition:transform .25s ease;
+  width:260px!important;
+}
+nav.drawer.open{transform:translateX(0)}
+
 @media(max-width:640px){
   .gpt-layout{flex-direction:column}
   .mobile-topbar{display:flex!important}
+  nav:not(.drawer){display:none}
   .message{padding:10px 16px}
   .chat-messages{padding:12px 0}
   .input-area{padding:8px 12px 14px}
@@ -210,6 +223,7 @@ function ChatPageInner() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<{ id: string; title: string }[]>([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -354,12 +368,31 @@ function ChatPageInner() {
         />
         {/* Mobile top bar */}
         <div className="mobile-topbar">
+          <button className="mobile-topbar-btn" onClick={() => setDrawerOpen(true)}>☰</button>
           <span className="mobile-topbar-title">🎨 {themeName || 'GPTStyler'}</span>
-          <div style={{display:'flex',gap:8}}>
-            <button className="mobile-topbar-btn" onClick={startNew}>＋ 새 채팅</button>
-            <a href="/" className="mobile-topbar-btn" style={{textDecoration:'none'}}>← 홈</a>
-          </div>
+          <button className="mobile-topbar-btn" onClick={startNew}>＋</button>
         </div>
+
+        {/* Mobile drawer overlay */}
+        <div className={`drawer-overlay${drawerOpen ? ' open' : ''}`} onClick={() => setDrawerOpen(false)} />
+
+        {/* Mobile drawer nav */}
+        <nav className={`drawer${drawerOpen ? ' open' : ''}`}>
+          <a href="/" className="nav-logo">GPTStyler</a>
+          <button className="new-chat-btn" onClick={() => { startNew(); setDrawerOpen(false); }}>＋ 새 채팅</button>
+          {history.length > 0 && (
+            <>
+              <div className="nav-section">최근 채팅</div>
+              {history.map(h => (
+                <div key={h.id} className="nav-item" onClick={() => setDrawerOpen(false)}>{h.title}</div>
+              ))}
+            </>
+          )}
+          <div className="nav-section" style={{ marginTop: 'auto' }}>테마</div>
+          <div className="nav-theme-badge">🎨 {themeName || '기본 테마'}</div>
+          <a href="/upload" className="back-link">← 디자인 변경</a>
+          <a href="/" className="back-link">← 갤러리</a>
+        </nav>
 
         {/* Sidebar */}
         <nav>
