@@ -34,7 +34,7 @@ export default function LikeButton({ styleId, initialLikes }: { styleId: string;
       onClick={handleLike}
       disabled={liked || loading}
       title={liked ? '이미 좋아요 했습니다' : '좋아요'}
-      className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
+      className={`w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-lg border text-sm font-medium transition-colors ${
         liked
           ? 'border-red-800 bg-red-950/40 text-red-400'
           : 'border-surface-3 bg-surface-1 text-gray-400 hover:border-red-800 hover:text-red-400'

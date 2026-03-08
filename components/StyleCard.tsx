@@ -15,10 +15,10 @@ export default function StyleCard({ style }: { style: Style }) {
       </Link>
 
       {/* Info */}
-      <div className="p-4 flex flex-col gap-3 flex-1">
+      <div className="p-3 sm:p-4 flex flex-col gap-2 sm:gap-3 flex-1">
         <div className="flex-1">
           <Link href={`/styles/${style.id}`}>
-            <h3 className="font-semibold text-white hover:text-brand transition-colors truncate">
+            <h3 className="font-semibold text-sm sm:text-base text-white hover:text-brand transition-colors truncate">
               {style.name}
             </h3>
           </Link>

@@ -47,20 +47,20 @@ export default function Comments({ styleId }: { styleId: string }) {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4 sm:gap-5">
       <h3 className="text-sm font-semibold text-gray-300">
         댓글 {comments.length > 0 && <span className="text-gray-500">{comments.length}</span>}
       </h3>
 
       {/* 입력 폼 */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <input
             value={author}
             onChange={e => setAuthor(e.target.value)}
             placeholder="닉네임"
             maxLength={30}
-            className="w-28 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
+            className="w-full sm:w-28 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
           />
           <input
             value={content}
@@ -72,7 +72,7 @@ export default function Comments({ styleId }: { styleId: string }) {
           <button
             type="submit"
             disabled={submitting || !author.trim() || !content.trim()}
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-brand hover:bg-brand-dark disabled:opacity-40 text-white transition-colors whitespace-nowrap"
+            className="w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-medium bg-brand hover:bg-brand-dark disabled:opacity-40 text-white transition-colors whitespace-nowrap"
           >
             {submitting ? '...' : '등록'}
           </button>
@@ -86,7 +86,7 @@ export default function Comments({ styleId }: { styleId: string }) {
       ) : (
         <div className="flex flex-col gap-3">
           {comments.map(c => (
-            <div key={c.id} className="bg-surface-2 rounded-xl px-4 py-3 flex flex-col gap-1">
+            <div key={c.id} className="bg-surface-2 rounded-xl px-3 sm:px-4 py-3 flex flex-col gap-1">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-gray-300">{c.author}</span>
                 <span className="text-xs text-gray-600">{timeAgo(c.created_at)}</span>

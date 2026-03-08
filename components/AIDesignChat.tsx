@@ -199,7 +199,7 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
       {/* Chat window */}
       <div className="flex-1 bg-surface-1 border border-surface-3 rounded-xl flex flex-col overflow-hidden" style={{ minHeight: 400 }}>
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 flex flex-col gap-3 sm:gap-4">
           {messages.length === 0 && (
             <div className="flex flex-col gap-3 my-auto">
               <p className="text-center text-gray-500 text-sm">어떤 테마를 원하세요?</p>
@@ -218,14 +218,14 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
           )}
 
           {messages.map((msg, i) => (
-            <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div key={i} className={`flex gap-2 sm:gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               {msg.role === 'assistant' && (
-                <div className="w-7 h-7 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
                   AI
                 </div>
               )}
               <div
-                className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                className={`max-w-[85%] sm:max-w-[80%] px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'user'
                     ? 'bg-brand text-white rounded-br-sm'
                     : 'bg-surface-2 text-gray-200 rounded-bl-sm'
@@ -239,7 +239,7 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
                         <img
                           src={(msg.content.find((c) => c.type === 'image_url') as any)?.image_url?.url}
                           alt="참고 이미지"
-                          className="w-24 h-24 object-cover rounded-lg opacity-80"
+                          className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg opacity-80"
                         />
                       )}
                   </div>
@@ -273,8 +273,8 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
 
         {/* Image preview bar */}
         {imagePreview && (
-          <div className="px-4 py-2 border-t border-surface-3 flex items-center gap-3">
-            <img src={imagePreview} alt="preview" className="w-12 h-12 object-cover rounded-lg" />
+          <div className="px-3 sm:px-4 py-2 border-t border-surface-3 flex items-center gap-3">
+            <img src={imagePreview} alt="preview" className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg" />
             <span className="text-xs text-gray-400 flex-1">이미지 첨부됨</span>
             <button onClick={() => setImagePreview(null)} className="text-xs text-red-400 hover:text-red-300">
               제거
@@ -283,7 +283,7 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
         )}
 
         {/* Input */}
-        <div className="p-3 border-t border-surface-3 flex gap-2">
+        <div className="p-2 sm:p-3 border-t border-surface-3 flex gap-2">
           <input type="file" ref={fileRef} accept="image/*" onChange={handleImageUpload} className="hidden" />
           <button
             onClick={() => fileRef.current?.click()}
@@ -313,16 +313,16 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
 
       {/* Save section */}
       {currentCSS && (
-        <div className="bg-surface-1 border border-surface-3 rounded-xl p-4 flex flex-col gap-3">
+        <div className="bg-surface-1 border border-surface-3 rounded-xl p-3 sm:p-4 flex flex-col gap-3">
           <p className="text-sm font-medium text-gray-300">마음에 들면 공유해보세요</p>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <input
               type="text"
               placeholder="스타일 이름 *"
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={60}
-              className="flex-1 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
+              className="w-full sm:flex-1 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
             />
             <input
               type="text"
@@ -330,12 +330,12 @@ export default function AIDesignChat({ onCSSUpdate }: { onCSSUpdate: (css: strin
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
               maxLength={30}
-              className="w-32 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
+              className="w-full sm:w-32 bg-surface-2 border border-surface-3 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-brand transition-colors"
             />
             <button
               onClick={handleSave}
               disabled={saving}
-              className="bg-brand hover:bg-brand-dark disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+              className="w-full sm:w-auto bg-brand hover:bg-brand-dark disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
             >
               {saving ? '저장 중...' : '공유하기'}
             </button>
