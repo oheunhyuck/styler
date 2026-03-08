@@ -34,13 +34,12 @@ export default function UploadPage() {
           }} />
         </div>
 
-        {/* Preview + action */}
+        {/* Preview + action — hidden on mobile until CSS is generated */}
         <div className="w-full lg:w-96 lg:flex-shrink-0 flex flex-col gap-3 lg:sticky lg:top-20">
-          <span className="text-xs text-gray-500">미리보기</span>
-          <IframePreview css={css} />
-
-          {css && (
+          {css ? (
             <>
+              <span className="text-xs text-gray-500">미리보기</span>
+              <IframePreview css={css} />
               <button
                 onClick={goToChat}
                 className="w-full py-3 rounded-xl text-sm font-semibold bg-brand hover:bg-brand-dark text-white transition-colors"
@@ -48,6 +47,11 @@ export default function UploadPage() {
                 💬 이 테마로 채팅하기
               </button>
             </>
+          ) : (
+            <div className="hidden lg:flex flex-col gap-3">
+              <span className="text-xs text-gray-500">미리보기</span>
+              <IframePreview css={css} />
+            </div>
           )}
         </div>
       </div>

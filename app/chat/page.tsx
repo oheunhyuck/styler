@@ -44,6 +44,9 @@ nav{
   overflow-y:auto;overflow-x:hidden;
   position:relative;z-index:2;
 }
+@media(max-width:640px){
+  nav{display:none}
+}
 .nav-logo{
   font-size:15px;font-weight:700;color:#fff;text-decoration:none;
   padding:8px 10px 16px;display:block;letter-spacing:.5px;
@@ -165,6 +168,27 @@ main{
 .send-btn:hover:not(:disabled){background:#1adb8a}
 .send-btn:disabled{background:rgba(255,255,255,0.1);color:#555;cursor:not-allowed}
 .input-hint{font-size:11px;color:#444;text-align:center;margin-top:6px}
+
+/* ── mobile top bar ── */
+.mobile-topbar{
+  display:none;position:relative;z-index:3;
+  background:#171717;border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:10px 16px;align-items:center;justify-content:space-between;
+}
+.mobile-topbar-title{font-size:15px;font-weight:700;color:#fff}
+.mobile-topbar-btn{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px;color:#ececec;font-size:12px;padding:6px 12px;cursor:pointer;
+}
+@media(max-width:640px){
+  .gpt-layout{flex-direction:column}
+  .mobile-topbar{display:flex!important}
+  .message{padding:10px 16px}
+  .chat-messages{padding:12px 0}
+  .input-area{padding:8px 12px 14px}
+  [data-message-author-role="user"] .whitespace-pre-wrap{max-width:85vw;font-size:13px}
+  [data-message-author-role="assistant"] .markdown{max-width:85vw;font-size:13px}
+}
 
 /* ── loading dots ── */
 .loading-dots span{animation:dot-bounce .8s infinite;display:inline-block}
@@ -328,6 +352,15 @@ function ChatPageInner() {
           ref={decorationRef}
           style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}
         />
+        {/* Mobile top bar */}
+        <div className="mobile-topbar">
+          <span className="mobile-topbar-title">🎨 {themeName || 'GPTStyler'}</span>
+          <div style={{display:'flex',gap:8}}>
+            <button className="mobile-topbar-btn" onClick={startNew}>＋ 새 채팅</button>
+            <a href="/" className="mobile-topbar-btn" style={{textDecoration:'none'}}>← 홈</a>
+          </div>
+        </div>
+
         {/* Sidebar */}
         <nav>
           <a href="/" className="nav-logo">GPTStyler</a>
